@@ -124,6 +124,7 @@ hr {
 .palette-details {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .project-name {
