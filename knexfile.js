@@ -12,6 +12,16 @@ module.exports = {
 
   },
 
+  test: {
+    client: 'pg',
+    connection: 'postgres://localhost/palettepicker',
+    migrations: {
+      directory: './db/migrations'
+    },
+    useNullAsDefault: true
+
+  },
+
   staging: {
     client: 'postgresql',
     connection: {
