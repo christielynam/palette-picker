@@ -1,20 +1,26 @@
 * {
   box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
 }
 
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #D6D2D2;
 }
 
 .page-title {
+  margin: 0;
+  color: #6369D1;
+  font-family: 'Amatic SC', cursive;
+  font-size: 100px;
 }
 
 .color-container {
   width: 95%;
   margin: auto;
-  padding: 25px 0;
+  padding: 30px 0;
   display: flex;
   justify-content: space-between;
 }
@@ -22,11 +28,86 @@ main {
 .color {
   height: 300px;
   width: 250px;
-  border: 2px solid black;
+  border: 2px solid #646165;
 }
 
-.generate-palatte-btn {
+.color-card-content {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.color-value {
+  color: #646165;
+}
+
+.lock-img {
+  width: 50px;
+  background-image: url('../assets/padlock-unlock.svg');
+  background-repeat: no-repeat;
+}
+
+.generate-palette-btn {
   height: 75px;
   width: 350px;
-  font-size: 20px;
+  background-color: #FFBA08;
+  border-radius: 37.5px;
+  color: #646165;
+  cursor: pointer;
+  font-size: 22px;
+  border: 2px solid #646165;
+}
+
+.controls-container {
+  width: 50%;
+  padding: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.select-folder {
+  height: 35px;
+  width: 150px;
+  color: #6369D1;
+  font-size: 18px;
+  outline: none;
+}
+
+.input-container,
+.controls-btn-container {
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+}
+
+.palette-name-input,
+.project-name-input {
+  height: 50px;
+  width: 300px;
+  padding-left: 10px;
+  border: 2px solid #646165;
+  color: #646165;
+  font-size: 18px;
+  outline: none;
+}
+
+.save-palette-btn,
+.save-project-btn {
+  height: 50px;
+  width: 150px;
+  border: 2px solid #FFBA08;
+  border-radius: 25px;
+  color: #FFBA08;
+  background-color: #646165;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+hr {
+  width: 95%;
 }

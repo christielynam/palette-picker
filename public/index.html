@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <meta charset='utf-8'>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700|Raleway:600" rel="stylesheet">
+    <link rel='stylesheet' href='css/styles.css'>
     <title>Palette Picker</title>
   </head>
   <body>
@@ -12,27 +12,61 @@
         <h1 class='page-title'>Palette Picker</h1>
       </header>
       <section class='color-container'>
-        <article class="color color1">
-
+        <article class='color color1'>
+          <div class="color-card-content">
+            <div class="lock-img"></div>
+            <h3 class='color-value val1'>#FFFFFF</h3>
+          </div>
         </article>
-        <article class="color color2">
-
+        <article class='color color2'>
+          <div class="color-card-content">
+            <div class="lock-img"></div>
+            <h3 class='color-value val2'>#FFFFFF</h3>
+          </div>
         </article>
-        <article class="color color3">
-
+        <article class='color color3'>
+          <div class="color-card-content">
+            <div class="lock-img"></div>
+            <h3 class='color-value val3'>#FFFFFF</h3>
+          </div>
         </article>
-        <article class="color color4">
-
+        <article class='color color4'>
+          <div class="color-card-content">
+            <div class="lock-img"></div>
+            <h3 class='color-value val4'>#FFFFFF</h3>
+          </div>
         </article>
-        <article class="color color5">
-
+        <article class='color color5'>
+          <div class="color-card-content">
+            <div class="lock-img"></div>
+            <h3 class='color-value val5'>#FFFFFF</h3>
+          </div>
         </article>
       </section>
-      <button class='generate-palatte-btn' type="button" name="button">Generate New Palette!</button>
-
+      <button class='generate-palette-btn' type='button' name='button'>Generate New Palette!</button>
+      <section class='controls-container'>
+        <select class='select-folder' name='select'>
+          <option value='Project 1'>Project 1</option>
+          <option value='Project 2'>Project 2</option>
+          <option value='Project 3'>Project 3</option>
+        </select>
+        <div class='input-container'>
+          <input class='palette-name-input' type='text' name='palette name' placeholder='Palette Name'>
+          <input class='project-name-input' type='text' name='new project name' placeholder='New Project Name'>
+        </div>
+        <div class='controls-btn-container'>
+          <button class='save-palette-btn' type='submit' name='save palette button'>Save Palette</button>
+          <button class='save-project-btn' type='submit' name='save project button'>Save Project</button>
+        </div>
+      </section>
     </main>
+    <hr>
+    <section class='project-container'>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="path/to/your/jquery.min.js"><\/script>')</script>
+    </section>
+
+    <script  src='http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script type='text/javascript' src='./js/scripts.js'>
+    </script>
   </body>
 </html>
