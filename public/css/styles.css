@@ -44,6 +44,7 @@ main {
 
 .lock-img {
   width: 35px;
+  cursor: pointer;
 }
 
 .generate-palette-btn {
@@ -105,8 +106,87 @@ main {
   background-color: #646165;
   cursor: pointer;
   font-size: 18px;
+  outline: none;
 }
 
 hr {
   width: 95%;
+}
+
+.project-container {
+  display: flex;
+  justify-content: space-around;
+  background-color: #646165;
+  color: #D6D2D2;
+  font-size: 25px;
+}
+
+.palette-details {
+  display: flex;
+  align-items: center;
+}
+
+.project-name {
+  padding: 20px;
+  background-color: #6369D1;
+  border-radius: 5px;
+  font-family: 'Amatic SC', cursive;
+  font-size: 50px;
+}
+
+.palette-name {
+  font-size: 25px;
+  margin-right: 20px;
+}
+
+.small-color-block {
+  height: 50px;
+  width: 50px;
+  /*border: 2px solid #FFBA08;*/
+}
+
+.trash-icon {
+  width: 35px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.block1 {
+  background-color: #913157;
+}
+
+.block2 {
+  background-color: #4FCA09;
+}
+
+.block3 {
+  background-color: #FE59C4;
+}
+
+.block4 {
+  background-color: #FBD6DE;
+}
+
+.block5 {
+  background-color: #24BAB7;
+}
+
+.block6 {
+  background-color: #8B57AE;
+}
+
+.block7 {
+  background-color: #249248;
+}
+
+.block8 {
+  background-color: #105AAD;
+}
+
+.block9 {
+  background-color: #50DD21;
+}
+
+.block10 {
+  background-color: #10EED9;
 }

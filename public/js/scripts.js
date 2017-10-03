@@ -18,3 +18,28 @@ const setColors = () => {
 $(document).ready(setColors);
 
 $('.generate-palette-btn').on('click', setColors);
+
+const appendNewPalette = () => {
+  const paletteName = $('.palette-name-input').val()
+  const palette = `<div class="palette-details">
+    <p class='palette-name'>${paletteName}</p>
+    <div class='small-color-block block1'></div>
+    <div class='small-color-block block2'></div>
+    <div class='small-color-block block3'></div>
+    <div class='small-color-block block4'></div>
+    <div class='small-color-block block5'></div>
+    <img class='trash-icon' src="./assets/trash.svg" alt="trash">
+  </div>`
+  $('.project-details').append(palette)
+}
+
+$('.save-palette-btn').on('click', appendNewPalette)
+
+// $('.save-project-btn').on('click', )
+
+const deletePalette = () => {
+  $(this).parents('.palette-details').remove();
+  console.log('delete palette');
+}
+
+$('.project-details').on('click', '.trash-icon', deletePalette)
