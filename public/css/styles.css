@@ -22,13 +22,13 @@ main {
   margin: auto;
   padding: 30px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  /*justify-content: space-between;*/
 }
 
 .color {
   height: 300px;
   width: 250px;
-  border: 2px solid #646165;
 }
 
 .color-card-content {
@@ -51,11 +51,14 @@ main {
   height: 75px;
   width: 350px;
   background-color: #FFBA08;
+  border: 2px solid #646165;
   border-radius: 37.5px;
   color: #646165;
   cursor: pointer;
-  font-size: 22px;
-  border: 2px solid #646165;
+  font-size: 40px;
+  outline: none;
+  font-family: 'Amatic SC', cursive;
+
 }
 
 .controls-container {
@@ -89,6 +92,7 @@ main {
   width: 300px;
   padding-left: 10px;
   border: 2px solid #646165;
+  border-radius: 5px;
   color: #646165;
   font-size: 18px;
   outline: none;
