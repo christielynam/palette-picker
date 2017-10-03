@@ -44,9 +44,7 @@ main {
 }
 
 .lock-img {
-  width: 50px;
-  background-image: url('../assets/padlock-unlock.svg');
-  background-repeat: no-repeat;
+  width: 35px;
 }
 
 .generate-palette-btn {
