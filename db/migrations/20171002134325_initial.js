@@ -14,14 +14,16 @@ exports.up = (knex, Promise) => {
       table.string('hex_val_4')
       table.string('hex_val_5')
       table.integer('project_id').unsigned()
-      table.foreign('project_id').references('projects.id')
+      table.foreign('project_id')
+        .references('projects.id')
+      table.timestamps(true, true)
     })
   ])
 };
 
 exports.down = (knex, Promise) => {
-  return Promise.all({
+  return Promise.all([
     knex.schema.dropTable('projects'),
-    knex.schema.dropTable('palettes')
-  })
+    knex.schema.dropTable('palettes'),
+  ])
 };
