@@ -19,6 +19,9 @@ $(document).ready(setColors);
 
 $('.generate-palette-btn').on('click', setColors);
 
+// need to write toggleLocked function
+// $('.color').on('click', e.target, toggleLocked)
+
 const appendNewPalette = () => {
   const paletteName = $('.palette-name-input').val()
   const palette = `<div class="palette-details">
@@ -30,7 +33,8 @@ const appendNewPalette = () => {
     <div class='small-color-block block5'></div>
     <img class='trash-icon' src="./assets/trash.svg" alt="trash">
   </div>`
-  $('.project-details').append(palette)
+  $('.project-details').append(palette);
+  $('.palette-name-input').val('');
 }
 
 $('.save-palette-btn').on('click', appendNewPalette)
@@ -38,8 +42,7 @@ $('.save-palette-btn').on('click', appendNewPalette)
 // $('.save-project-btn').on('click', )
 
 const deletePalette = () => {
-  $(this).parents('.palette-details').remove();
-  console.log('delete palette');
+  $('.palette-details').remove(); // this is removing all of them
 }
 
-$('.project-details').on('click', '.trash-icon', deletePalette)
+$('.project-container').on('click', '.trash-icon', deletePalette)
