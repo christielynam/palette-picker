@@ -48,8 +48,8 @@ $('.save-palette-btn').on('click', appendNewPalette)
 
 // $('.save-project-btn').on('click', )
 
-const deletePalette = () => {
-  $('.palette-details').remove(); // this is removing all of them
+const deletePalette = (e) => {
+  $(e.target).parents('.palette-details').remove(); // this is removing all of them
 }
 
 $('.project-container').on('click', '.trash-icon', deletePalette)
