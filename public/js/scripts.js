@@ -45,4 +45,4 @@ const deletePalette = () => {
   $('.palette-details').remove(); // this is removing all of them
 }
 
-$('.project-details').on('click', '.trash-icon', deletePalette)
+$('.project-container').on('click', '.trash-icon', deletePalette)
