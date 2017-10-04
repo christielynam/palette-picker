@@ -9,15 +9,22 @@ const generateRandomColor = () => {
 
 const setColors = () => {
   for (let i = 1; i < 6; i++) {
-    let color = generateRandomColor();
-    $(`.color${i}`).css('background-color', color);
-    $(`.val${i}`).text(color);
+    if (!$(`.color${i}`).hasClass('locked-color')) {
+      let color = generateRandomColor();
+      $(`.color${i}`).css('background-color', color);
+      $(`.val${i}`).text(color);
+    }
   }
 }
 
 $(document).ready(setColors);
 
 $('.generate-palette-btn').on('click', setColors);
+
+$('.color-container').on('click', '.lock-img', (e) => {
+  $(e.target).toggleClass('locked');
+  $(e.target).parents('.color').toggleClass('locked-color')
+})
 
 // need to write toggleLocked function
 // $('.color').on('click', e.target, toggleLocked)

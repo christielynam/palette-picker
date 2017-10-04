@@ -3,6 +3,10 @@
   font-family: 'Raleway', sans-serif;
 }
 
+html {
+  background-color: #FFBA08;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -38,13 +42,22 @@ main {
   justify-content: flex-end;
 }
 
-.color-value {
-  color: #646165;
-}
-
 .lock-img {
   width: 35px;
+  height: 35px;
+  background-image: url('../assets/padlock-unlock.svg');
+  background-repeat: no-repeat;
   cursor: pointer;
+  background-size: contain;
+}
+
+.locked {
+  background-image: url('../assets/padlock-lock.svg');
+
+}
+
+.color-value {
+  color: #646165;
 }
 
 .generate-palette-btn {
