@@ -11,7 +11,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Palette Picker';
 
+app.post('/api/v1/projects', (request, response) => {
+  const { name } = request.body;
+  response.status(201).json({ name })
+})
 
+app.get('/api/v1/projects', (request, response) => {
+  response.status(200).json(response)
+})
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
