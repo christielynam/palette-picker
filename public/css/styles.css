@@ -57,7 +57,7 @@ main {
 }
 
 .color-value {
-  color: #646165;
+  color: #FFF;
 }
 
 .generate-palette-btn {
@@ -151,12 +151,13 @@ hr {
 .palette-name {
   font-size: 25px;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .small-color-block {
   height: 50px;
   width: 50px;
-  /*border: 2px solid #FFBA08;*/
+  cursor: pointer;
 }
 
 .trash-icon {

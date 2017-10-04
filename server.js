@@ -19,17 +19,43 @@ app.locals.title = 'Palette Picker';
 
 
 app.post('/api/v1/projects', (request, response) => {
-  const { name } = request.body;
+  const project = request.body;
 
-  database('projects').insert({ name }, '*')
-    .then(results => response.status(201).json(results))
+  for (let requiredParameter of ['name']) {
+    if (!project[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ error: `Expected format: { name: <String> }. You're missing a "${requiredParameter}" property.` });
+    }
+  }
+
+  database('projects').insert(project, '*')
+    .then(results => {
+      response.status(201).json(results)
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    })
 })
 
 app.post('/api/v1/palettes', (request, response) => {
-  const { name, hex_val_1, hex_val_2, hex_val_3, hex_val_4, hex_val_5, project_id } = response.body;
+  const palette = request.body;
 
-  database('palettes').insert({ name, hex_val_1, hex_val_2, hex_val_3, hex_val_4, hex_val_5, project_id }, '*')
-    .then(results => response.status(201).json(results))
+  for (let requiredParameter of ['name', 'hex_val_1', 'hex_val_2', 'hex_val_3', 'hex_val_4', 'hex_val_5', 'project_id']) {
+    if (!palette[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ error: `Expected format: { name: <String>, hex_val_1: <String>, hex_val_2: <String>, hex_val_3: <String>, hex_val_4: <String>, hex_val_5: <String>, project_id: <Integer> }. You're missing a "${requiredParameter}" property.` });
+    }
+  }
+
+  database('palettes').insert(palette, '*')
+    .then(results => {
+      response.status(201).json(results)
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    })
 })
 
 app.get('/api/v1/projects', (request, response) => {
