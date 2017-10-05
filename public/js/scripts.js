@@ -26,8 +26,6 @@ $('.color-container').on('click', '.lock-img', (e) => {
   $(e.target).parents('.color').toggleClass('locked-color')
 })
 
-// need to write toggleLocked function
-// $('.color').on('click', e.target, toggleLocked)
 
 const appendNewPalette = () => {
   const paletteName = $('.palette-name-input').val()
@@ -46,10 +44,35 @@ const appendNewPalette = () => {
 
 $('.save-palette-btn').on('click', appendNewPalette)
 
-// $('.save-project-btn').on('click', )
+const appendProject = (results) => {
+  const project = `<option value=${results.id}>${results.name}</option>`
+  $('.select-folder').append(project);
+}
+
+const createNewProject = () => {
+  const projectName = $('.project-name-input').val();
+  fetch('/api/v1/projects', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: projectName })
+  })
+  .then(response => {
+    if (response.status === 201) {
+      return response.json()
+    }
+  })
+  .then(results => appendProject(results[0]))
+
+
+  $('.project-name-input').val('');
+}
+
+$('.save-project-btn').on('click', createNewProject)
 
 const deletePalette = (e) => {
-  $(e.target).parents('.palette-details').remove(); // this is removing all of them
+  $(e.target).parents('.palette-details').remove();
 }
 
 $('.project-container').on('click', '.trash-icon', deletePalette)
