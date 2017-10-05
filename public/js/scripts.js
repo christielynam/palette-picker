@@ -17,18 +17,36 @@ const setColors = () => {
   }
 }
 
-// const fetchProjects = () => {
-//   fetch('/api/v1/projects', {
-//     method: 'GET',
-//
-//   })
-// }
+const appendProject = (results) => {
+  const projectName = `<option value=${results.id}>${results.name}</option>`
+  const project = `<article class="project-details">
+    <h2 class='project-name'>${results.name}</h2>
+  </article>`
+
+  $('.select-folder').append(projectName);
+  $('.project-container').append(project);
+}
+
+
+
+
+
+const fetchProjects = () => {
+  fetch('/api/v1/projects')
+  .then(response => response.json())
+  .then(projects => {
+    projects.forEach(project => appendProject(project))
+  })
+}
 
 $(document).ready(() => {
-  setColors()
+  setColors();
+  fetchProjects();
 });
 
+
 $('.generate-palette-btn').on('click', setColors);
+
 
 $('.color-container').on('click', '.lock-img', (e) => {
   $(e.target).toggleClass('locked');
@@ -53,15 +71,7 @@ const appendNewPalette = () => {
 
 $('.save-palette-btn').on('click', appendNewPalette)
 
-const appendProject = (results) => {
-  const projectName = `<option value=${results.id}>${results.name}</option>`
-  const project = `<article class="project-details">
-    <h2 class='project-name'>${results.name}</h2>
-  </article>`
 
-  $('.select-folder').append(projectName);
-  $('.project-container').append(project);
-}
 
 const createNewProject = () => {
   const projectName = $('.project-name-input').val();
