@@ -82,6 +82,16 @@ app.get('/api/v1/palettes', (request, response) => {
     })
 })
 
+app.get('/api/v1/projects/:id/palettes', (request, response) => {
+  database('palettes').where({ project_id: request.params.id }).select()
+  .then(palettes => {
+    response.status(200).json(palettes)
+  })
+  .catch(error => {
+    response.status(500).json({ error })
+  })
+})
+
 
 
 
