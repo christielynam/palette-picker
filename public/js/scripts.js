@@ -17,7 +17,16 @@ const setColors = () => {
   }
 }
 
-$(document).ready(setColors);
+// const fetchProjects = () => {
+//   fetch('/api/v1/projects', {
+//     method: 'GET',
+//
+//   })
+// }
+
+$(document).ready(() => {
+  setColors()
+});
 
 $('.generate-palette-btn').on('click', setColors);
 
@@ -45,8 +54,13 @@ const appendNewPalette = () => {
 $('.save-palette-btn').on('click', appendNewPalette)
 
 const appendProject = (results) => {
-  const project = `<option value=${results.id}>${results.name}</option>`
-  $('.select-folder').append(project);
+  const projectName = `<option value=${results.id}>${results.name}</option>`
+  const project = `<article class="project-details">
+    <h2 class='project-name'>${results.name}</h2>
+  </article>`
+
+  $('.select-folder').append(projectName);
+  $('.project-container').append(project);
 }
 
 const createNewProject = () => {
