@@ -46,18 +46,23 @@ const fetchProjects = () => {
   fetch('/api/v1/projects')
   .then(response => response.json())
   .then(projects => {
-    projects.forEach(project => appendProject(project))
+    projects.forEach(project => {
+      appendProject(project)
+      // fetch('/api/v1/palettes/:project.id')
+      // .then(response => response.json())
+      // .then(palettes => console.log(palettes))
+    })
   })
   .catch(error => console.log(error))
 }
 
-// const fetchPalettes = () => {
-//   fetch('/api/v1/palettes')
-//   .then(response => response.json())
-//   .then(palettes => {
-//     console.log(palletes);
-//   })
-// }
+const fetchPalettes = () => {
+  fetch('/api/v1/palettes')
+  .then(response => response.json())
+  .then(palettes => {
+    console.log(palettes);
+  })
+}
 
 const createNewProject = () => {
   const projectName = $('.project-name-input').val();
@@ -107,7 +112,7 @@ const deletePalette = (e) => {
 $(document).ready(() => {
   setColors();
   fetchProjects();
-  // fetchPalettes();
+  fetchPalettes();
 });
 
 
