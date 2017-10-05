@@ -16,6 +16,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Palette Picker';
 
+app.get('/', (request, response) => {
+  response.send('Welcome to Palette Picker!');
+});
+
 
 
 app.post('/api/v1/projects', (request, response) => {
@@ -84,3 +88,5 @@ app.get('/api/v1/palettes', (request, response) => {
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });
+
+module.exports = app;

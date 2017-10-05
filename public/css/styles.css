@@ -89,6 +89,10 @@ main {
   outline: none;
 }
 
+select option:disabled {
+  color: #666666;
+}
+
 .input-container,
 .controls-btn-container {
   height: 150px;
