@@ -10,10 +10,9 @@ describe('Client Routes', () => {
     chai.request(server)
     .get('/')
     .end((error, response) => {
-      //assertions against the response returned
       response.should.have.status(200);
       response.should.be.html;
-      // response.res.text.should.equal('Welcome to Palette Picker!');
+      response.res.text.includes('Palette Picker');
       done();
     });
   });

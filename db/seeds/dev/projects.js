@@ -1,4 +1,3 @@
-
 exports.seed = function(knex, Promise) {
   // We must return a Promise from within our seed function
   // Without this initial `return` statement, the seed execution
