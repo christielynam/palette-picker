@@ -127,7 +127,11 @@ const deletePalette = (e) => {
 };
 
 const changeColorGenerator = (e) => {
-  console.log($(e.target).closest('.palette-details'));
+  const colorArray = JSON.parse($(e.target).closest('.palette-details').attr('data-colors'));
+  console.log(colorArray);
+  colorArray.forEach((color, i) => {
+    $(`.color${i + 1}`).css('background-color', color);
+  })
 }
 
 
