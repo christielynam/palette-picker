@@ -30,7 +30,7 @@ const appendProject = (results) => {
 const appendAllPalettes = (palettes) => {
   palettes.forEach(palette => {
     const paletteName = palette.name;
-    const projectPalette = `<div class="palette-details ${palette.id}">
+    const projectPalette = `<div class='palette-details ${palette.id}' data-colors='${JSON.stringify([])}'>
       <p class='palette-name'>${paletteName}</p>
       <div class='small-color-block block1' style='background-color: ${palette.hex_val_1}'></div>
       <div class='small-color-block block2' style='background-color: ${palette.hex_val_2}'></div>
@@ -126,6 +126,10 @@ const deletePalette = (e) => {
   $(e.target).parents('.palette-details').remove();
 };
 
+const changeColorGenerator = (e) => {
+  console.log($(e.target).closest('.palette-details').find('.small-color-block').css('background-color'));
+}
+
 
 // Event Listeners
 $(document).ready(() => {
@@ -145,3 +149,5 @@ $('.save-palette-btn').on('click', addNewPalette);
 $('.save-project-btn').on('click', createNewProject);
 
 $('.project-container').on('click', '.trash-icon', deletePalette);
+
+$('.project-container').on('click', '.palette-name', changeColorGenerator);
