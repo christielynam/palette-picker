@@ -3,9 +3,9 @@ const generateRandomColor = () => {
   let color = '#';
   for (let i = 0; i < 6; i++) {
     color += characters[Math.floor(Math.random() * 16)];
-  }
+  };
   return color;
-}
+};
 
 const setColors = () => {
   for (let i = 1; i < 6; i++) {
@@ -13,34 +13,19 @@ const setColors = () => {
       let color = generateRandomColor();
       $(`.color${i}`).css('background-color', color);
       $(`.val${i}`).text(color);
-    }
-  }
-}
+    };
+  };
+};
 
 const appendProject = (results) => {
-  const projectName = `<option value=${results.id} selected>${results.name}</option>`
+  const projectName = `<option value=${results.id} selected>${results.name}</option>`;
   const project = `<article class="project-details ${results.id}">
     <h2 class='project-name'>${results.name}</h2>
-  </article>`
+  </article>`;
 
   $('.select-folder').append(projectName);
   $('.project-container').append(project);
-}
-
-const appendNewPalette = (results) => {
-  const paletteName = $('.palette-name-input').val()
-  const palette = `<div class="palette-details">
-    <p class='palette-name'>${paletteName}</p>
-    <div class='small-color-block block1' style='background-color: ${results[0].hex_val_1}'></div>
-    <div class='small-color-block block2' style='background-color: ${results[0].hex_val_2}'></div>
-    <div class='small-color-block block3' style='background-color: ${results[0].hex_val_3}'></div>
-    <div class='small-color-block block4' style='background-color: ${results[0].hex_val_4}'></div>
-    <div class='small-color-block block5' style='background-color: ${results[0].hex_val_5}'></div>
-    <img class='trash-icon' src="./assets/trash.svg" alt="trash">
-  </div>`
-  $(`.${results[0].project_id}`).append(palette);
-  $('.palette-name-input').val('');
-}
+};
 
 const appendAllPalettes = (palettes) => {
   palettes.forEach(palette => {
@@ -53,11 +38,27 @@ const appendAllPalettes = (palettes) => {
       <div class='small-color-block block4' style='background-color: ${palette.hex_val_4}'></div>
       <div class='small-color-block block5' style='background-color: ${palette.hex_val_5}'></div>
       <img class='trash-icon' src="./assets/trash.svg" alt="trash">
-    </div>`
+    </div>`;
 
     $(`.${palette.project_id}`).append(projectPalette);
-  })
-}
+  });
+};
+
+const appendNewPalette = (results) => {
+  const paletteName = $('.palette-name-input').val();
+  const palette = `<div class="palette-details">
+    <p class='palette-name'>${paletteName}</p>
+    <div class='small-color-block block1' style='background-color: ${results[0].hex_val_1}'></div>
+    <div class='small-color-block block2' style='background-color: ${results[0].hex_val_2}'></div>
+    <div class='small-color-block block3' style='background-color: ${results[0].hex_val_3}'></div>
+    <div class='small-color-block block4' style='background-color: ${results[0].hex_val_4}'></div>
+    <div class='small-color-block block5' style='background-color: ${results[0].hex_val_5}'></div>
+    <img class='trash-icon' src="./assets/trash.svg" alt="trash">
+  </div>`;
+
+  $(`.${results[0].project_id}`).append(palette);
+  $('.palette-name-input').val('');
+};
 
 const fetchProjects = () => {
   fetch('/api/v1/projects')
@@ -71,18 +72,11 @@ const fetchProjects = () => {
     })
   })
   .catch(error => console.log(error))
-}
-
-// const fetchPalettes = () => {
-//   fetch('/api/v1/palettes')
-//   .then(response => response.json())
-//   .then(palettes => {
-//     console.log(palettes);
-//   })
-// }
+};
 
 const createNewProject = () => {
   const projectName = $('.project-name-input').val();
+
   fetch('/api/v1/projects', {
     method: 'POST',
     headers: {
@@ -99,7 +93,7 @@ const createNewProject = () => {
   .catch(error => console.log(error))
 
   $('.project-name-input').val('');
-}
+};
 
 const addNewPalette = () => {
   const paletteName = $('.palette-name-input').val();
@@ -119,35 +113,28 @@ const addNewPalette = () => {
   })
   .then(response => response.json())
   .then(palette => appendNewPalette(palette))
-}
+};
 
 const deletePalette = (e) => {
   $(e.target).parents('.palette-details').remove();
-}
-
+};
 
 
 // Event Listeners
 $(document).ready(() => {
   setColors();
   fetchProjects();
-  // fetchPalettes();
 });
-
 
 $('.generate-palette-btn').on('click', setColors);
 
-
 $('.color-container').on('click', '.lock-img', (e) => {
   $(e.target).toggleClass('locked');
-  $(e.target).parents('.color').toggleClass('locked-color')
+  $(e.target).parents('.color').toggleClass('locked-color');
 })
 
+$('.save-palette-btn').on('click', addNewPalette);
 
-$('.save-palette-btn').on('click', addNewPalette)
+$('.save-project-btn').on('click', createNewProject);
 
-
-$('.save-project-btn').on('click', createNewProject)
-
-
-$('.project-container').on('click', '.trash-icon', deletePalette)
+$('.project-container').on('click', '.trash-icon', deletePalette);
