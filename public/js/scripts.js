@@ -30,7 +30,7 @@ const appendProject = (results) => {
 const appendAllPalettes = (palettes) => {
   palettes.forEach(palette => {
     const paletteName = palette.name;
-    const projectPalette = `<div class='palette-details ${palette.id}' data-colors='${JSON.stringify([])}'>
+    const projectPalette = `<div class='palette-details ${palette.id}' data-colors='${JSON.stringify([palette.hex_val_1, palette.hex_val_2, palette.hex_val_3, palette.hex_val_4, palette.hex_val_5])}'>
       <p class='palette-name'>${paletteName}</p>
       <div class='small-color-block block1' style='background-color: ${palette.hex_val_1}'></div>
       <div class='small-color-block block2' style='background-color: ${palette.hex_val_2}'></div>
@@ -127,7 +127,7 @@ const deletePalette = (e) => {
 };
 
 const changeColorGenerator = (e) => {
-  console.log($(e.target).closest('.palette-details').find('.small-color-block').css('background-color'));
+  console.log($(e.target).closest('.palette-details'));
 }
 
 
