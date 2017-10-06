@@ -44,9 +44,19 @@ const appendNewPalette = (results) => {
 
 const appendAllPalettes = (palettes) => {
   palettes.forEach(palette => {
+    const paletteName = palette.name;
+    const projectPalette = `<div class="palette-details">
+      <p class='palette-name'>${paletteName}</p>
+      <div class='small-color-block block1' style='background-color: ${palette.hex_val_1}'></div>
+      <div class='small-color-block block2' style='background-color: ${palette.hex_val_2}'></div>
+      <div class='small-color-block block3' style='background-color: ${palette.hex_val_3}'></div>
+      <div class='small-color-block block4' style='background-color: ${palette.hex_val_4}'></div>
+      <div class='small-color-block block5' style='background-color: ${palette.hex_val_5}'></div>
+      <img class='trash-icon' src="./assets/trash.svg" alt="trash">
+    </div>`
 
+    $(`.${palette.project_id}`).append(projectPalette);
   })
-
 }
 
 const fetchProjects = () => {
@@ -57,7 +67,7 @@ const fetchProjects = () => {
       appendProject(project);
       fetch(`/api/v1/projects/${project.id}/palettes`)
       .then(response => response.json())
-      .then(palettes => console.log('palettes', palettes))
+      .then(palettes => appendAllPalettes(palettes))
     })
   })
   .catch(error => console.log(error))
