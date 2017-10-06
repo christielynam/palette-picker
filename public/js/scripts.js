@@ -30,7 +30,7 @@ const appendProject = (results) => {
 const appendAllPalettes = (palettes) => {
   palettes.forEach(palette => {
     const paletteName = palette.name;
-    const projectPalette = `<div class="palette-details">
+    const projectPalette = `<div class="palette-details ${palette.id}">
       <p class='palette-name'>${paletteName}</p>
       <div class='small-color-block block1' style='background-color: ${palette.hex_val_1}'></div>
       <div class='small-color-block block2' style='background-color: ${palette.hex_val_2}'></div>
@@ -116,6 +116,13 @@ const addNewPalette = () => {
 };
 
 const deletePalette = (e) => {
+  const id = $(e.target).parents('.palette-details').attr('class').split(' ')[1];
+  fetch(`/api/v1/palettes/${id}`, {
+    method: 'DELETE'
+  })
+  .then(() => $(`.${id}`).remove())
+  .catch(error => console.log(error))
+
   $(e.target).parents('.palette-details').remove();
 };
 
