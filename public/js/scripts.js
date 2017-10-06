@@ -155,3 +155,5 @@ $('.save-project-btn').on('click', createNewProject);
 $('.project-container').on('click', '.trash-icon', deletePalette);
 
 $('.project-container').on('click', '.palette-name', changeColorGenerator);
+
+$('.project-container').on('click', '.small-color-block', changeColorGenerator);
