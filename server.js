@@ -83,7 +83,9 @@ app.get('/api/v1/palettes', (request, response) => {
 })
 
 app.get('/api/v1/projects/:id/palettes', (request, response) => {
-  database('palettes').where({ project_id: request.params.id }).select()
+  const { id } = request.params
+
+  database('palettes').where({ project_id: id }).select()
   .then(palettes => {
     response.status(200).json(palettes)
   })
@@ -92,6 +94,21 @@ app.get('/api/v1/projects/:id/palettes', (request, response) => {
   })
 })
 
+app.delete('/api/v1/palettes/:id', (request, response) => {
+  const { id } = request.params;
+
+  database('palettes').where({ id }).del()
+  .then(palette => {
+    if (palette) {
+      response.sendStatus(204)
+    } else {
+      response.status(422).json({ error: 'Not Found' })
+    }
+  })
+  .catch(error => {
+    response.status(500).json({ error })
+  })
+})
 
 
 
