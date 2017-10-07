@@ -58,27 +58,29 @@ app.post('/api/v1/palettes', (request, response) => { // request and response ob
   // if the request body contains the required params, the body of the request is added to the palettes table
   database('palettes').insert(palette, '*')
     .then(results => { // returns a promise of an array with an object of the palette that was added
-      response.status(201).json(results) //a status code of 201 is returned indicating that the palette was successfully added and converted into a json object
+      response.status(201).json(results) // a status code of 201 is returned indicating that the palette was successfully added and converted into a json object
     })
     .catch(error => { // if there is a problem adding the palette,
       response.status(500).json({ error }) // a status code of 500 is returned notifying the user of an internal server eror
     })
 })
 
-app.get('/api/v1/projects', (request, response) => {
-  database('projects').select()
-    .then(projects => {
-      response.status(200).json(projects)
+// makes a request to the projects table in the db
+app.get('/api/v1/projects', (request, response) => { // request and response objects passed into callback
+  database('projects').select() // makes a selection for all the projects in the db
+    .then(projects => { // returns an array of all the projects that have been added to the db
+      response.status(200).json(projects) // a status code of 200 is returned indicating that all the projects were successfully returned and converted into a json object
     })
     .catch(error => { // if there is a problem retrieving the projects,
       response.status(500).json({ error }) // a status code of 500 is returned notifying the user of an internal server eror
     })
 })
 
-app.get('/api/v1/palettes', (request, response) => {
-  database('palettes').select()
-    .then(palettes => {
-      response.status(200).json(palettes)
+// makes a request to the palettes table in the db
+app.get('/api/v1/palettes', (request, response) => { // request and response objects passed into callback
+  database('palettes').select() // makes a selection for all the palettes in the db
+    .then(palettes => { // returns an array of all the palettes that have been added to the db
+      response.status(200).json(palettes) // a status code of 200 is returned indicating that all the palettes were successfully returned and converted into a json object
     })
     .catch(error => { // if there is a problem retrieving the palettes
       response.status(500).json({ error }) // a status code of 500 is returned notifying the user of an internal server eror
