@@ -21,7 +21,6 @@ app.get('/', (request, response) => {
 });
 
 
-
 app.post('/api/v1/projects', (request, response) => {
   const project = request.body;
 
