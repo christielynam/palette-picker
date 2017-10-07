@@ -1,20 +1,20 @@
-const express = require('express');
-const app = express();
-const path = require('path');
+const express = require('express'); // allows us to run express on top of node and write code that is easier to read and understand
+const app = express(); // creates an instance of express
+const path = require('path'); // allows us to serve up static assets
 
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser'); // allows express to ready the body of a post
 
-const environment = process.env.NODE_ENV || 'development';
-const configuration = require('./knexfile')[environment];
-const database = require('knex')(configuration);
+const environment = process.env.NODE_ENV || 'development'; // environment variable that app should run in
+const configuration = require('./knexfile')[environment]; // fetches the db config for whatever environment we are in
+const database = require('knex')(configuration); // allows the express app to connect to environment
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); // middleware that is serving up static assets in the public directory
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // middleware that parses the body of a post into a JSON object
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.set('port', process.env.PORT || 3000);
-app.locals.title = 'Palette Picker';
+app.set('port', process.env.PORT || 3000); // sets the port for the server to run on
+app.locals.title = 'Palette Picker'; // local variable that is not saved
 
 app.get('/', (request, response) => {
   response.send('Welcome to Palette Picker!')
@@ -109,9 +109,9 @@ app.delete('/api/v1/palettes/:id', (request, response) => {
 })
 
 
-
+// server is listening for requests on specific port and notifies you in the terminal that the server is running
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });
 
-module.exports = app;
+module.exports = app; // exports the server
