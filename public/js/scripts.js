@@ -135,6 +135,12 @@ const changeColorGenerator = (e) => {
   });
 };
 
+const modifyColor = (e) => {
+  const hexVal = $(e.target).text();
+  const colorSwatch = $(e.target).closest('.color');
+  colorSwatch.css('background-color', hexVal);
+};
+
 
 $(document).ready(() => {
   setColors();
@@ -157,3 +163,5 @@ $('.project-container').on('click', '.trash-icon', deletePalette);
 $('.project-container').on('click', '.palette-name', changeColorGenerator);
 
 $('.project-container').on('click', '.small-color-block', changeColorGenerator);
+
+$('.color-container').on('input', '.color-value', modifyColor);
