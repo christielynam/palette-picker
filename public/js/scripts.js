@@ -17,6 +17,20 @@ const setColors = () => {
   };
 };
 
+const fetchProjects = () => {
+  fetch('/api/v1/projects')
+  .then(response => response.json())
+  .then(projects => {
+    projects.forEach(project => {
+      appendProject(project);
+      fetch(`/api/v1/projects/${project.id}/palettes`)
+      .then(response => response.json())
+      .then(palettes => appendAllPalettes(palettes))
+    })
+  })
+  .catch(error => console.log(error))
+};
+
 const appendProject = (results) => {
   const projectName = `<option value=${results.id} selected>${results.name}</option>`;
   const project = `<article class="project-details ${results.id}">
@@ -42,36 +56,6 @@ const appendAllPalettes = (palettes) => {
 
     $(`.${palette.project_id}`).append(projectPalette);
   });
-};
-
-const appendNewPalette = (results) => {
-  const paletteName = $('.palette-name-input').val();
-  const palette = `<div class="palette-details">
-    <p class='palette-name'>${paletteName}</p>
-    <div class='small-color-block block1' style='background-color: ${results[0].hex_val_1}'></div>
-    <div class='small-color-block block2' style='background-color: ${results[0].hex_val_2}'></div>
-    <div class='small-color-block block3' style='background-color: ${results[0].hex_val_3}'></div>
-    <div class='small-color-block block4' style='background-color: ${results[0].hex_val_4}'></div>
-    <div class='small-color-block block5' style='background-color: ${results[0].hex_val_5}'></div>
-    <img class='trash-icon' src="./assets/trash.svg" alt="trash">
-  </div>`;
-
-  $(`.${results[0].project_id}`).append(palette);
-  $('.palette-name-input').val('');
-};
-
-const fetchProjects = () => {
-  fetch('/api/v1/projects')
-  .then(response => response.json())
-  .then(projects => {
-    projects.forEach(project => {
-      appendProject(project);
-      fetch(`/api/v1/projects/${project.id}/palettes`)
-      .then(response => response.json())
-      .then(palettes => appendAllPalettes(palettes))
-    })
-  })
-  .catch(error => console.log(error))
 };
 
 const createNewProject = () => {
@@ -115,8 +99,25 @@ const addNewPalette = () => {
   .then(palette => appendNewPalette(palette))
 };
 
+const appendNewPalette = (results) => {
+  const paletteName = $('.palette-name-input').val();
+  const palette = `<div class="palette-details">
+    <p class='palette-name'>${paletteName}</p>
+    <div class='small-color-block block1' style='background-color: ${results[0].hex_val_1}'></div>
+    <div class='small-color-block block2' style='background-color: ${results[0].hex_val_2}'></div>
+    <div class='small-color-block block3' style='background-color: ${results[0].hex_val_3}'></div>
+    <div class='small-color-block block4' style='background-color: ${results[0].hex_val_4}'></div>
+    <div class='small-color-block block5' style='background-color: ${results[0].hex_val_5}'></div>
+    <img class='trash-icon' src="./assets/trash.svg" alt="trash">
+  </div>`;
+
+  $(`.${results[0].project_id}`).append(palette);
+  $('.palette-name-input').val('');
+};
+
 const deletePalette = (e) => {
   const id = $(e.target).parents('.palette-details').attr('class').split(' ')[1];
+
   fetch(`/api/v1/palettes/${id}`, {
     method: 'DELETE'
   })
@@ -128,14 +129,13 @@ const deletePalette = (e) => {
 
 const changeColorGenerator = (e) => {
   const colorArray = JSON.parse($(e.target).closest('.palette-details').attr('data-colors'));
-  console.log(colorArray);
+
   colorArray.forEach((color, i) => {
     $(`.color${i + 1}`).css('background-color', color);
-  })
-}
+  });
+};
 
 
-// Event Listeners
 $(document).ready(() => {
   setColors();
   fetchProjects();
@@ -146,7 +146,7 @@ $('.generate-palette-btn').on('click', setColors);
 $('.color-container').on('click', '.lock-img', (e) => {
   $(e.target).toggleClass('locked');
   $(e.target).parents('.color').toggleClass('locked-color');
-})
+});
 
 $('.save-palette-btn').on('click', addNewPalette);
 

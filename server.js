@@ -17,9 +17,8 @@ app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Palette Picker';
 
 app.get('/', (request, response) => {
-  response.send('Welcome to Palette Picker!');
+  response.send('Welcome to Palette Picker!')
 });
-
 
 app.post('/api/v1/projects', (request, response) => {
   const project = request.body;
@@ -28,7 +27,7 @@ app.post('/api/v1/projects', (request, response) => {
     if (!project[requiredParameter]) {
       return response
         .status(422)
-        .send({ error: `Expected format: { name: <String> }. You're missing a "${requiredParameter}" property.` });
+        .send({ error: `Expected format: { name: <String> }. You're missing a "${requiredParameter}" property.` })
     }
   }
 
@@ -37,7 +36,7 @@ app.post('/api/v1/projects', (request, response) => {
       response.status(201).json(results)
     })
     .catch(error => {
-      response.status(500).json({ error });
+      response.status(500).json({ error })
     })
 })
 
@@ -48,7 +47,7 @@ app.post('/api/v1/palettes', (request, response) => {
     if (!palette[requiredParameter]) {
       return response
         .status(422)
-        .send({ error: `Expected format: { name: <String>, hex_val_1: <String>, hex_val_2: <String>, hex_val_3: <String>, hex_val_4: <String>, hex_val_5: <String>, project_id: <Integer> }. You're missing a "${requiredParameter}" property.` });
+        .send({ error: `Expected format: { name: <String>, hex_val_1: <String>, hex_val_2: <String>, hex_val_3: <String>, hex_val_4: <String>, hex_val_5: <String>, project_id: <Integer> }. You're missing a "${requiredParameter}" property.` })
     }
   }
 
@@ -57,7 +56,7 @@ app.post('/api/v1/palettes', (request, response) => {
       response.status(201).json(results)
     })
     .catch(error => {
-      response.status(500).json({ error });
+      response.status(500).json({ error })
     })
 })
 
@@ -82,7 +81,7 @@ app.get('/api/v1/palettes', (request, response) => {
 })
 
 app.get('/api/v1/projects/:id/palettes', (request, response) => {
-  const { id } = request.params
+  const { id } = request.params;
 
   database('palettes').where({ project_id: id }).select()
   .then(palettes => {

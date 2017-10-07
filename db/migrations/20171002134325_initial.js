@@ -17,13 +17,13 @@ exports.up = (knex, Promise) => {
       table.foreign('project_id')
         .references('projects.id')
       table.timestamps(true, true)
-    })
-  ])
+    });
+  ]);
 };
 
 exports.down = (knex, Promise) => {
   return Promise.all([
     knex.schema.dropTable('palettes'),
     knex.schema.dropTable('projects'),
-  ])
+  ]);
 };

@@ -1,10 +1,8 @@
 exports.seed = function(knex, Promise) {
-
-  return knex('palettes').del() // delete all palettes first
-    .then(() => knex('projects').del()) // delete all projects
+  return knex('palettes').del()
+    .then(() => knex('projects').del())
     .then(() => {
       return Promise.all([
-        // Insert a single project, return the project ID, insert 2 palettes
         knex('projects').insert({
           name: 'Project 1'
         }, 'id')
@@ -32,7 +30,7 @@ exports.seed = function(knex, Promise) {
         })
         .then(() => console.log('Seeding complete!'))
         .catch(error => console.log(`Error seeding data: ${error}`))
-      ]) 
+      ])
     })
     .catch(error => console.log(`Error seeding data: ${error}`));
 };

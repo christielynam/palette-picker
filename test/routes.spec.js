@@ -10,6 +10,7 @@ const database = require('knex')(configuration);
 chai.use(chaiHttp);
 
 describe('Client Routes', () => {
+
   it('should return the home page with text', (done) => {
     chai.request(server)
     .get('/')
@@ -29,6 +30,7 @@ describe('Client Routes', () => {
       done();
     });
   });
+
 });
 
 describe('API Routes', () => {
