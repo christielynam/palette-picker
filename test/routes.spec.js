@@ -112,8 +112,7 @@ describe('API Routes', () => {
       });
     });
 
-  })
-
+  });
 
   describe('GET /api/v1/palettes', () => {
 
@@ -236,6 +235,87 @@ describe('API Routes', () => {
         done();
       });
     });
+
+  });
+
+  describe('GET /api/v1/projects/:id/palettes', () => {
+
+    it('should return all the paletted for a specific project', (done) => {
+      chai.request(server)
+      .get('/api/v1/projects/1/palettes')
+      .end((error, response) => {
+        response.should.have.status(200);
+        response.should.be.json;
+        response.body.should.be.a('array');
+        response.body.length.should.equal(2);
+        response.body[0].should.have.property('id');
+        response.body[0].id.should.equal(1);
+        response.body[0].should.have.property('name');
+        response.body[0].name.should.equal('Life Savers');
+        response.body[0].should.have.property('hex_val_1');
+        response.body[0].hex_val_1.should.equal('#2B0DBC')
+        response.body[0].should.have.property('hex_val_2');
+        response.body[0].hex_val_2.should.equal('#7C93FE');
+        response.body[0].should.have.property('hex_val_3');
+        response.body[0].hex_val_3.should.equal('#DC8AC9');
+        response.body[0].should.have.property('hex_val_4');
+        response.body[0].hex_val_4.should.equal('#C9309E');
+        response.body[0].should.have.property('hex_val_5');
+        response.body[0].hex_val_5.should.equal('#B442E9');
+        response.body[0].should.have.property('project_id');
+        response.body[0].project_id.should.equal(1);
+        response.body[1].should.have.property('id');
+        response.body[1].id.should.equal(2);
+        response.body[1].should.have.property('name');
+        response.body[1].name.should.equal('Cotton Candy');
+        response.body[1].should.have.property('hex_val_1');
+        response.body[1].hex_val_1.should.equal('#135D1D')
+        response.body[1].should.have.property('hex_val_2');
+        response.body[1].hex_val_2.should.equal('#8AF105');
+        response.body[1].should.have.property('hex_val_3');
+        response.body[1].hex_val_3.should.equal('#7946B2');
+        response.body[1].should.have.property('hex_val_4');
+        response.body[1].hex_val_4.should.equal('#27CCB6');
+        response.body[1].should.have.property('hex_val_5');
+        response.body[1].hex_val_5.should.equal('#874D5E');
+        response.body[1].should.have.property('project_id');
+        response.body[1].project_id.should.equal(1);
+        done();
+      });
+    });
+
+    it('should return a 404 if the path is incorrect', (done) => {
+      chai.request(server)
+      .get('/api/v1/projects/1/poop')
+      .end((error, response) => {
+        response.should.have.status(404);
+        done();
+      });
+    });
+
+  });
+
+  describe('DELETE /api/v1/palettes/:id', () => {
+
+    it('should delete a palette from the db', (done) => {
+      chai.request(server)
+      .delete('/api/v1/palettes/2')
+      .end((error, response) => {
+        response.should.have.status(204);
+        done();
+      });
+    });
+
+    it('should return a 422 error if the palette is not found', (done) => {
+      chai.request(server)
+      .delete('/api/v1/palettes/500')
+      .end((error, response) => {
+        response.should.have.status(422);
+        response.body.error.should.equal('Not Found');
+        done();
+      });
+    });
+
   });
 
 });
