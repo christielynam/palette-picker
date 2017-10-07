@@ -87,27 +87,29 @@ app.get('/api/v1/palettes', (request, response) => { // request and response obj
     })
 })
 
-app.get('/api/v1/projects/:id/palettes', (request, response) => {
-  const { id } = request.params;
+// makes a request to the palettes table for palettes that belong to a specific project
+app.get('/api/v1/projects/:id/palettes', (request, response) => { // request and response objects passed into callback
+  const { id } = request.params; // setting the id of the request body to a variable
 
-  database('palettes').where({ project_id: id }).select()
-  .then(palettes => {
-    response.status(200).json(palettes)
+  database('palettes').where({ project_id: id }).select() // makes a selection for all the palettes that have a matching project id
+  .then(palettes => { // returns an array of all the palettes in the db that belong to a specific project
+    response.status(200).json(palettes) // a status code of 200 is returned indicating that all the palettes were successfully returned and converted into a json object
   })
   .catch(error => { // if there is a problem retrieving the palettes for a specific proejct,
     response.status(500).json({ error }) // a status code of 500 is returned notifying the user of an internal server eror
   })
 })
 
-app.delete('/api/v1/palettes/:id', (request, response) => {
-  const { id } = request.params;
+// makes a request to the palettes table for a specific palette
+app.delete('/api/v1/palettes/:id', (request, response) => { // request and response objects passed into callback
+  const { id } = request.params; // setting the id of the request body to a variable
 
-  database('palettes').where({ id }).del()
+  database('palettes').where({ id }).del() // deletes the palette that has a matching id
   .then(palette => {
-    if (palette) {
-      response.sendStatus(204)
-    } else {
-      response.status(422).json({ error: 'Not Found' })
+    if (palette) { // if the palette was successfully found,
+      response.sendStatus(204) // a status code of 204 is returned indicating that the palette was sucessfully deleted from the db
+    } else { // if the palette was not found,
+      response.status(422).json({ error: 'Not Found' }) // a status code of 422 is returned with an error object notifying the user that the specific palette was not found
     }
   })
   .catch(error => { // if there is a problem deleting a specific palette,
