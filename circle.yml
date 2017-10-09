@@ -17,4 +17,4 @@ machine:
       production:
         branch: master
         heroku:
-          appname: palette-picker
+          appname: palette-picker-cl
