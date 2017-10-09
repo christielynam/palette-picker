@@ -17,7 +17,7 @@ exports.up = (knex, Promise) => {
       table.foreign('project_id')
         .references('projects.id')
       table.timestamps(true, true)
-    });
+    })
   ]);
 };
 
