@@ -20,6 +20,22 @@ app.get('/', (request, response) => {
   response.send('Welcome to Palette Picker!')
 });
 
+// app.use((request, response, next) => {
+//   if (request.headers['x-forwarded-proto'] !== 'https') {
+//     return response.redirect('https://' + request.get('host') + request.url);
+//   }
+//   next();
+// })
+
+const requireHTTPS = (request, response, next) => {
+  if (request.headers['x-forwarded-proto'] !== 'https') {
+    return response.redirect('https://' + request.get('host') + request.url);
+  }
+  next();
+};
+
+app.use(requireHTTPS);
+
 app.post('/api/v1/projects', (request, response) => {
   const project = request.body;
 
